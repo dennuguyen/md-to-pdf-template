@@ -1,0 +1,29 @@
+# Makefile for arduino-cli.
+#
+# To verify an Arduino sketch:
+#
+# 	make -s verify
+#
+# To upload an Arduino sketch:
+#
+#	make -s upload PORT=<PORT>
+#
+# If Makefile is placed inside a sketch folder then LIB must be specified.
+#
+#	make -s verify LIB=../../lib
+#
+# If Makefile is placed outside a sketch folder then PATH and LIB must be specified.
+#
+#	make -s verify PATH=lab03/encoder LIB=../../lib
+#
+
+LIB:=lib
+BOARD_NAME:=arduino:avr:mega
+PATH:=${shell basename ${CURDIR}}
+SKETCH=${if ${wildcard ${PATH}.ino},./${shell basename ${PATH}}.ino,${PATH}/${shell basename ${PATH}}.ino}
+
+upload: verify
+	arduino-cli upload ${SKETCH} -b ${BOARD_NAME} -p ${PORT}
+
+verify:
+	arduino-cli compile ${SKETCH} -b ${BOARD_NAME} --library ${LIB} --warnings all

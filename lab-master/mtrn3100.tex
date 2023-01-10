@@ -1,0 +1,51 @@
+\setuppapersize[A4]
+\setuppagenumbering[state=none]
+\setuplayout[topspace=20mm, header=0mm, textheight=257mm, width=160mm]
+\setupbodyfont[ss, 12pt]
+\setupinteraction[state=start, color=sectioncolor]
+
+\setupitemize[nowhite, after]
+\setupitemize[leftmargin=5.5mm]
+
+\defineitemgroup[enumerate]
+
+\setuphead[chapter, section, subsection, subsubsection][number=no]
+
+\starttext
+
+\startalignment[center]
+
+$if(course)$
+    \blank[5*big]
+    {\tfd \bf $course$}
+$endif$
+
+$if(year)$
+    \blank[big]
+    {\tfc $year$}
+$endif$
+
+\blank[5*big]
+
+\externalfigure[unsw.jpg]
+
+\blank[15*big]
+
+$if(title)$
+    \blank[5*big]
+    {\tfd $title$}
+$endif$
+
+\stopalignment
+
+\pagebreak
+
+$if(toc)$
+    \completecontent[list={chapter, section, subsection}, alternative=c]
+$endif$
+
+\pagebreak
+
+$body$
+
+\stoptext

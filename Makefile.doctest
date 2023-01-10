@@ -1,0 +1,5 @@
+doctest:
+	g++ -std=c++11 -Wall -Wextra -Werror -Wuninitialized -Ilib test/${TEST}
+
+clean:
+	rm ./a.out

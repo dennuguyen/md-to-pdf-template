@@ -1,0 +1,15 @@
+# Makefile for Pandoc Markdown to PDF conversion.
+
+PDF_ENGINE:=context
+TEMPLATE:=lab-master/mtrn3100.tex
+
+all:
+	for md in */lab*.md; do \
+		${MAKE} pdf MD=$${md}; \
+	done
+
+pdf:
+	pandoc --pdf-engine=${PDF_ENGINE} --shift-heading-level-by=-1 --template ${TEMPLATE} --toc --resource-path=$(firstword $(subst /, ,$(MD))) --listings -s ${MD} -o ${MD:md=pdf} > /dev/null; \
+
+clean:
+	rm -rf **/lab*.pdf
